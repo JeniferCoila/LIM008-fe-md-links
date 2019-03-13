@@ -4,9 +4,9 @@ import {
   walkTheDirectory, 
   dirContent, 
   fileNameExt, 
-  content, 
+  fileContents, 
   isDirectory,
-  mdPathContent,
+  mdPathLinks,
   filterMdPath
 } from '../src/utils/util.js';
 
@@ -16,10 +16,10 @@ const outputContent = [`Lorem ipsum dolor sit amet
   <http://joedicastro.com>`, ];
 
 const outputWalk = [
+  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\archivo-de-txto.txt',
   'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md', 
   'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md',
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md',
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\archivo-de-txto.txt'
+  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md'
 ];
  
 const outputFilePaths = [
@@ -64,12 +64,12 @@ describe('fileNameExt', () => {
   });
 });
 
-describe('content', () => {
+describe('fileContents', () => {
   it('must be a function', () => {
-    expect(typeof content).toBe('function');
+    expect(typeof fileContents).toBe('function');
   });
   it('should return an array of paths', () => {
-    expect(content('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md')).toEqual('Lorem ipsum dolor sit amet,');
+    expect(fileContents('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md')).toEqual('Lorem ipsum dolor sit amet,');
   });
 });
 
@@ -92,14 +92,14 @@ describe('walkTheDirectory', () => {
   });
 });
 
-describe('mdPathContent', () => {
+/* describe('mdPathLinks', () => {
   it('must be a function', () => {
-    expect(typeof mdPathContent).toBe('function');
+    expect(typeof mdPathLinks).toBe('function');
   });
   it('should return an array of paths', () => {
-    expect(mdPathContent(['C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md'])).toEqual(outputContent);
+    expect(mdPathLinks(['C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md'])).toEqual(outputContent);
   });
-});
+}); */
 
 describe('filterMdPath', () => {
   it('must be a function', () => {

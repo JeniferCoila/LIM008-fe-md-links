@@ -1,18 +1,25 @@
 {
-  "name": "social-network",
+  "name": "markdown-links",
   "version": "1.0.0",
-  "description": "Social Network @ Laboratoria",
-  "main": "src/index.html",
+  "description": "Markdown Links @ Laboratoria",
+  "main": "lib/app.js",
   "keywords": [
     "javascript",
     "npm",
     "jest"
   ],
   "license": "MIT",
+  "bin": {
+    "md-links": "./lib/cli.js"
+  },
   "scripts": {
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage",
     "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git"
+
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
