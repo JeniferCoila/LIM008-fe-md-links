@@ -22,9 +22,6 @@ const outputFilePaths = [
   
 
 describe('walkTheDirectory', () => {
-  it('must be a function', () => {
-    expect(typeof walkTheDirectory).toBe('function');
-  });
   it('should return an array of paths', () => {
     expect(walkTheDirectory(inputDir)).toEqual(outputWalk);
   });
@@ -32,21 +29,17 @@ describe('walkTheDirectory', () => {
 
   
 describe('filterMdPath', () => {
-  it('must be a function', () => {
-    expect(typeof filterMdPath).toBe('function');
-  });
-  it('should return an array of paths', () => {
+  it('should return an array of md paths', () => {
     expect(filterMdPath(outputWalk)).toEqual(outputFilePaths);
   });
 });
 
 
 describe('mdPathArr', () => {
-  it('must be a function', () => {
-    expect(typeof mdPathArr).toBe('function');
-  });
-  it('should return an array of paths', () => {
+  it('should return an array of a md path', () => {
     expect(mdPathArr(inputPath)).toEqual([inputPath]);
+  });
+  it('should return an array of md paths', () => {
     expect(mdPathArr(inputDir)).toEqual(outputFilePaths);
   });
 });

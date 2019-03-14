@@ -14,5 +14,3 @@ export const stats = (arrObj) => {
   };
   return valObj;
 };
-  
-  

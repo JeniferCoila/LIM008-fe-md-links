@@ -21,3 +21,4 @@ export const validateLinks = (objLink) => {
   }));
   return Promise.all(arrLinks);
 };
+

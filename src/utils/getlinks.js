@@ -6,7 +6,8 @@ export const regex = /(^|[^!])\[([^\[\]]+)\]\s*\(([^)]+.+)\)/gm;
 export const getObjectLinks = inputPath => 
   inputPath.length === 1 ?
     getLinks(inputPath.toString()) :
-    inputPath.reduce((fileA, fileB) => getLinks(fileA).concat(getLinks(fileB)));
+    inputPath.reduce((fileA, fileB) =>  
+      getLinks(fileA).concat(getLinks(fileB)));
 
 export const getLinks = (inputPath) => {
   const arrObj = [];
