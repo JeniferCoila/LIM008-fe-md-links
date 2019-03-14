@@ -28,7 +28,7 @@ las tareas y un _project_ para organizar el trabajo.
 Dentro de cada _milestone_ se crearon y se asignaron los _issues_.
 
 ## Organización por diagrama de flujo
-![Flowchart](https://drive.google.com/file/d/19AY5f_1Eq2e3-mGSCBcC4B462fxwTaCU/view?usp=sharing) 
+![Flowchart](https://i.imgur.com/98108Ym.jpg)
 
 ### JavaScript API
 
