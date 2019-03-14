@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 
 export const isPathAbsolute = inputPath => path.isAbsolute(inputPath);
-export const unionpath = inputPath => path.join(dir, path);
+export const unionpath = (inputPath, file) => path.join(inputPath, file);
 export const relToAbs = inputPath => path.resolve(inputPath);
 export const dirContent = inputPath => fs.readdirSync(inputPath);
 export const fileNameExt = inputPath => path.extname(inputPath);

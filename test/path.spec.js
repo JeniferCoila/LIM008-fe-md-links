@@ -1,30 +1,32 @@
 import {
   walkTheDirectory, 
-  filterMdPath
+  filterMdPath,
+  mdPathArr
 } from '../src/utils/path.js';
 
-const outputWalk = [
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\archivo-de-txto.txt',
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md', 
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md',
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md'
-  ];
-   
-  const outputFilePaths = [
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md', 
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md',
-    'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md',
-  ];
+const inputPath = `${process.cwd()}\\test\\dir\\folder\\lorem-three.md`;
+const inputDir = `${process.cwd()}\\test\\dir`;
 
-  const outputContent = [`Lorem ipsum dolor sit amet
- 
-  <http://joedicastro.com>`, ];
+const outputWalk = [
+  `${process.cwd()}\\test\\dir\\archivo-de-txto.txt`, 
+  `${process.cwd()}\\test\\dir\\folder\\lorem-three.md`, 
+  `${process.cwd()}\\test\\dir\\lorem-two.md`,
+  `${process.cwd()}\\test\\dir\\lorem.md`
+];
+   
+const outputFilePaths = [
+  `${process.cwd()}\\test\\dir\\folder\\lorem-three.md`, 
+  `${process.cwd()}\\test\\dir\\lorem-two.md`,
+  `${process.cwd()}\\test\\dir\\lorem.md`
+];
+  
+
 describe('walkTheDirectory', () => {
   it('must be a function', () => {
     expect(typeof walkTheDirectory).toBe('function');
   });
   it('should return an array of paths', () => {
-    expect(walkTheDirectory('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir')).toEqual(outputWalk);
+    expect(walkTheDirectory(inputDir)).toEqual(outputWalk);
   });
 });
 
@@ -35,5 +37,16 @@ describe('filterMdPath', () => {
   });
   it('should return an array of paths', () => {
     expect(filterMdPath(outputWalk)).toEqual(outputFilePaths);
+  });
+});
+
+
+describe('mdPathArr', () => {
+  it('must be a function', () => {
+    expect(typeof mdPathArr).toBe('function');
+  });
+  it('should return an array of paths', () => {
+    expect(mdPathArr(inputPath)).toEqual([inputPath]);
+    expect(mdPathArr(inputDir)).toEqual(outputFilePaths);
   });
 });

@@ -73,6 +73,16 @@ describe('unionpath', () => {
     expect(typeof unionpath).toBe('function');
   });
   it('should return a boolean', () => {
-    expect(unionpath(inputDir)).toEqual(true);
+    expect(unionpath(inputDir, '\\folder\\lorem-three.md')).toEqual(inputPath);
   });
 });
+
+describe('itExists', () => {
+  it('must be a function', () => {
+    expect(typeof itExists).toBe('function');
+  });
+  it('should return a boolean', () => {
+    expect(itExists(inputPath)).toEqual(true);
+  });
+});
+
