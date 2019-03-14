@@ -6,7 +6,6 @@ import {getObjectLinks} from './utils/getlinks.js';
 import {validateLinks} from './utils/validate.js';
 import {itExists} from './utils/util.js';
 
-
 export const mdLinks = (path, options) => { 
   return new Promise((resolve, reject) => {
     if (itExists(path)) { 
