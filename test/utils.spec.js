@@ -1,38 +1,23 @@
 import {
   isPathAbsolute, 
   relToAbs, 
-  walkTheDirectory, 
   dirContent, 
   fileNameExt, 
   fileContents, 
   isDirectory,
-  mdPathLinks,
-  filterMdPath
+  unionpath,
+  itExists
 } from '../src/utils/util.js';
 
+const inputPath = `${process.cwd()}\\test\\dir\\folder\\lorem-three.md`;
+const inputDir = `${process.cwd()}\\test\\dir`;
 
-const outputContent = [`Lorem ipsum dolor sit amet
- 
-  <http://joedicastro.com>`, ];
-
-const outputWalk = [
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\archivo-de-txto.txt',
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md', 
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md',
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md'
-];
- 
-const outputFilePaths = [
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md', 
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md',
-  'C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md',
-];
 describe('isPathAbsolute', () => {
   it('must be a function', () => {
     expect(typeof isPathAbsolute).toBe('function');
   });
   it('should return a boolean', () => {
-    expect(isPathAbsolute('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md')).toEqual(true);
+    expect(isPathAbsolute(inputPath)).toEqual(true);
   });
 });
 
@@ -41,7 +26,7 @@ describe('relToAbs', () => {
     expect(typeof relToAbs).toBe('function');
   });
   it('should return an absolute path', () => {
-    expect(relToAbs('test\\dir\\folder\\lorem-three.md')).toEqual('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\folder\\lorem-three.md');
+    expect(relToAbs('test\\dir\\folder\\lorem-three.md')).toEqual(inputPath);
   });
 });
 
@@ -51,7 +36,7 @@ describe('dirContent', () => {
     expect(typeof dirContent).toBe('function');
   });
   it('should return an array of paths', () => {
-    expect(dirContent('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir')).toEqual(['archivo-de-txto.txt', 'folder', 'lorem-two.md', 'lorem.md']);
+    expect(dirContent(inputDir)).toEqual(['archivo-de-txto.txt', 'folder', 'lorem-two.md', 'lorem.md']);
   });
 });
 
@@ -60,7 +45,7 @@ describe('fileNameExt', () => {
     expect(typeof fileNameExt).toBe('function');
   });
   it('should return an array of paths', () => {
-    expect(fileNameExt('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md')).toEqual('.md');
+    expect(fileNameExt(inputPath)).toEqual('.md');
   });
 });
 
@@ -68,8 +53,8 @@ describe('fileContents', () => {
   it('must be a function', () => {
     expect(typeof fileContents).toBe('function');
   });
-  it('should return an array of paths', () => {
-    expect(fileContents('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem-two.md')).toEqual('Lorem ipsum dolor sit amet,');
+  it('should return a string', () => {
+    expect(fileContents(inputPath)).toEqual('Lorem ipsum dolor sit amet [El lms tu terror](https://lms.laboratoria.la/courses)');
   });
 });
 
@@ -78,35 +63,16 @@ describe('isDirectory', () => {
   it('must be a function', () => {
     expect(typeof isDirectory).toBe('function');
   });
-  it('should return an array of paths', () => {
-    expect(isDirectory('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir')).toEqual(true);
+  it('should return a boolean', () => {
+    expect(isDirectory(inputDir)).toEqual(true);
   });
 });
 
-describe('walkTheDirectory', () => {
+describe('unionpath', () => {
   it('must be a function', () => {
-    expect(typeof walkTheDirectory).toBe('function');
+    expect(typeof unionpath).toBe('function');
   });
-  it('should return an array of paths', () => {
-    expect(walkTheDirectory('C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir')).toEqual(outputWalk);
+  it('should return a boolean', () => {
+    expect(unionpath(inputDir)).toEqual(true);
   });
 });
-
-/* describe('mdPathLinks', () => {
-  it('must be a function', () => {
-    expect(typeof mdPathLinks).toBe('function');
-  });
-  it('should return an array of paths', () => {
-    expect(mdPathLinks(['C:\\Users\\jenif\\OneDrive\\LAB\\PROYECTOS\\First Project\\Repositorio proyecto\\LIM008-fe-md-links\\test\\dir\\lorem.md'])).toEqual(outputContent);
-  });
-}); */
-
-describe('filterMdPath', () => {
-  it('must be a function', () => {
-    expect(typeof filterMdPath).toBe('function');
-  });
-  it('should return an array of paths', () => {
-    expect(filterMdPath(outputWalk)).toEqual(outputFilePaths);
-  });
-});
-
