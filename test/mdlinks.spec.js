@@ -10,6 +10,17 @@ const inputNotMd = `${process.cwd()}\\test\\dir\\archivo-de-txto.txt`;
 const outputObjLinks = [{
   'file': `${process.cwd()}\\test\\dir\\lorem-two.md`,
   'href': 'https://lms.laboratoria.la/courses',
+  'text': 'El lms tu terror',
+},
+{
+  'file': `${process.cwd()}\\test\\dir\\lorem-two.md`,
+  'href': 'https://flippingbook.com/404',
+  'text': 'Lorem ipsum dolor sit amet',
+}];
+
+const outputObjLinksValidate = [{
+  'file': `${process.cwd()}\\test\\dir\\lorem-two.md`,
+  'href': 'https://lms.laboratoria.la/courses',
   'status': 200,
   'statusText': 'OK',
   'text': 'El lms tu terror',
@@ -27,8 +38,9 @@ const outputStats = {
   'total': 2, 
   'unique': 1
 };
+
 describe('mdLinks', () => {
-  it('should return aan array of objects', (done) => {
+  it('should return an array of objects', (done) => {
     mdLinks(inputDir, {validate: false, stats: false}).then(res => {
       expect(res).toEqual(outputObjLinks);
       done();
@@ -36,6 +48,12 @@ describe('mdLinks', () => {
   });
   it('should return total, broken and unique amount of links', (done) => {
     mdLinks(inputDir, {validate: true, stats: false}).then(res => {
+      expect(res).toEqual(outputObjLinksValidate);
+      done();
+    }).catch(() => done());
+  });
+  it('should return total and unique amount of links', (done) => {
+    mdLinks(inputDir, {validate: false, stats: true}).then(res => {
       expect(res).toEqual(outputStats);
       done();
     }).catch(() => done());
@@ -50,12 +68,12 @@ describe('mdLinks', () => {
     mdLinks(inputNotMd, {validate: true, stats: true}).catch(err => {
       expect(err).toEqual('No se encontraron archivos .md');
       done();
-    });
+    }).then(() => done());
   });
   it('should return an error message when the inputPath is an invalid one', (done) => {
     mdLinks(inputInvalidPath, {validate: true, stats: true}).catch(err => {
       expect(err).toEqual('Ingrese una ruta válida');
       done();
-    });
+    }).then(() => done());
   });
 });

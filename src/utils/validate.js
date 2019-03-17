@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 export const validateLinks = (objLink) => {
-  const arrLinks = objLink.map(obj => new Promise((resolve, reject) => {
+  const arrLinks = objLink.map(obj => new Promise((resolve) => {
     fetch(obj.href)
       .then((response) => {        
         if (response.status >= 200 && response.status < 400) {
@@ -13,7 +13,7 @@ export const validateLinks = (objLink) => {
           obj.statusText = 'fail';
           resolve(obj);
         }
-      }).catch(obj => {
+      }).catch(response => {
         obj.status = 'No es una dirección válida';
         obj.statusText = 'fail';
         resolve(obj);
@@ -21,4 +21,3 @@ export const validateLinks = (objLink) => {
   }));
   return Promise.all(arrLinks);
 };
-

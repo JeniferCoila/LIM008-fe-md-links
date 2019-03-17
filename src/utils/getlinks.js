@@ -1,13 +1,17 @@
 
 import {fileContents} from './util.js';
 
-export const regex = /(^|[^!])\[([^\[\]]+)\]\s*\(([^)]+.+)\)/gm;
+export const regex = /(^|[^!])\[([^\[\]]+)\]\(([^)]+)/gm;
 
-export const getObjectLinks = inputPath => 
-  inputPath.length === 1 ?
+export const getObjectLinks = inputPath => {
+  const abc = inputPath.length === 1 ?
     getLinks(inputPath.toString()) :
-    inputPath.reduce((fileA, fileB) =>  
-      getLinks(fileA).concat(getLinks(fileB)));
+    inputPath.reduce((result, file) => {
+      result = result.concat(getLinks(file));
+      return result;
+    }, []);
+  return abc;
+};
 
 export const getLinks = (inputPath) => {
   const arrObj = [];

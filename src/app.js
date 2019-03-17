@@ -1,12 +1,11 @@
 /* In this file we call functions from utils, using parameters */
 
-/* console.log(process.argv); */
 import {mdPathArr} from './utils/path';
 import {getObjectLinks} from './utils/getlinks.js';
 import {validateLinks} from './utils/validate.js';
 import {itExists} from './utils/util.js';
 
-export const mdLinks = (path, options) => { 
+export const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
     if (itExists(path)) { 
       const arrMds = mdPathArr(path);
@@ -15,7 +14,7 @@ export const mdLinks = (path, options) => {
       } else {
         const arrObjLinks = getObjectLinks(arrMds);
         if (options.validate) {
-          validateLinks(arrObjLinks).then(res => resolve(res));
+          validateLinks(arrObjLinks).then(res => resolve(res)).catch(err => resolve(err));
         } else {
           resolve(arrObjLinks);
         }

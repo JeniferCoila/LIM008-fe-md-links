@@ -9,12 +9,12 @@ export const mdPathArr = (inputPath) => {
 };
   
 export const filterMdPath = inputPath => 
-  inputPath.filter(file => fileNameExt(file) === '.md');
+  inputPath.filter(file => fileNameExt(file).toLowerCase() === '.md');
   
 export const walkTheDirectory = (inputPath) => {
   let arrMdPath = [];
   dirContent(inputPath).forEach((file) => {
-    let newpath = relToAbs(unionpath(inputPath, file));
+    let newpath = unionpath(inputPath, file);
     (isDirectory(newpath) ? arrMdPath = arrMdPath.concat(walkTheDirectory(newpath)) : arrMdPath.push(newpath));
   });
   return arrMdPath;

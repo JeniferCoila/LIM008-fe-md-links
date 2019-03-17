@@ -13,8 +13,17 @@ const inputObjLink = [{
           `${process.cwd()}\\test\\dir\\lorem-two.md` },
 { 'href': 'https://flippingbook.com/404',
   'text': 'Lorem ipsum dolor sit amet',
-  'file':
-           `${process.cwd()}\\test\\dir\\lorem-two.md` }];
+  'file': `${process.cwd()}\\test\\dir\\lorem-two.md` 
+},
+{ 'href': 'http://joedicadssssstro.com',
+  'text': 'Lorem ipsum dolor sit amet',
+  'file': `${process.cwd()}\\test\\dir\\lorem.md` 
+},
+{ 'href': 'http://joedicadssssstro.com',
+  'text': 'Lorem ipsum dolor sit amet',
+  'file': `${process.cwd()}\\test\\dir\\lorem.md` 
+}
+];
 
 const outputObjectLink = [{
   'file': `${process.cwd()}\\test\\dir\\folder\\lorem-three.md`,
@@ -34,6 +43,18 @@ const outputObjectLink = [{
   'file': `${process.cwd()}\\test\\dir\\lorem-two.md`,
   'href': 'https://flippingbook.com/404',
   'status': 404,
+  'statusText': 'fail',
+  'text': 'Lorem ipsum dolor sit amet',
+},
+{ 'file': `${process.cwd()}\\test\\dir\\lorem.md`,
+  'href': 'http://joedicadssssstro.com',
+  'status': 'No es una dirección válida',
+  'statusText': 'fail',
+  'text': 'Lorem ipsum dolor sit amet',
+},
+{ 'file': `${process.cwd()}\\test\\dir\\lorem.md`,
+  'href': 'http://joedicadssssstro.com',
+  'status': 'No es una dirección válida',
   'statusText': 'fail',
   'text': 'Lorem ipsum dolor sit amet',
 }];
