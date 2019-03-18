@@ -14,7 +14,7 @@ export const validateLinks = (objLink) => {
           resolve(obj);
         }
       }).catch(response => {
-        obj.status = 'No es una dirección válida';
+        obj.status = 'No es una URL válida';
         obj.statusText = 'fail';
         resolve(obj);
       });

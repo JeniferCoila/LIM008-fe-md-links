@@ -1,5 +1,9 @@
 # Markdown Links
 
+Esta es una librería que te permitirá extraer links de un archivo markdown (.md)
+
+## Markdown
+
 Markdown es un lenguaje de marcado ligero muy popular entre developers. Es usado en muchísimas plataformas que
 manejan texto plano (GitHub, foros, blogs, ...), y es muy común
 encontrar varios archivos en ese formato en cualquier tipo de repositorio
@@ -16,10 +20,16 @@ algunas estadísticas.
 
 ## Guía de uso e instalación de la librería
 
-El módulo puede ser instalable via `npm install JeniferCoila/LIM008-fe-md-links`. Este
-módulo incluye tanto un _ejecutable_ que se puede invocar en la línea de
+El módulo puede ser instalable via 
+```js
+npm install JeniferCoila/LIM008-fe-md-links
+```
+Este módulo incluye tanto un _ejecutable_ que se puede invocar en la línea de
 comando como una interfaz que se puede importar con `require` para usarlo
 programáticamente.
+
+
+## Organización 
 
 Antes de comenzar a codear, se pensó en la arquitectura y
 boilerplate del proyecto. Se usaron una serie de _issues_ y _milestones_ para priorizar
@@ -27,12 +37,25 @@ las tareas y un _project_ para organizar el trabajo.
 
 Dentro de cada _milestone_ se crearon y se asignaron los _issues_.
 
-## Organización por diagrama de flujo
+### Backlog de la librería 
+
+[Link del 
+proyecto en GitHub](https://github.com/JeniferCoila/LIM008-fe-md-links/projects/1)
+
+![Backlog](https://i.imgur.com/MWAMUj6.png)
+
+### Diagrama de flujo
 ![Flowchart](https://i.imgur.com/98108Ym.jpg)
+
+### Pseudocódigo
+
+Se elaboró un cuadro para poder tener mapeados las funciones a usar y poder hacer los tests antes de codear.
+
+![Table](https://i.imgur.com/6QDTOVP.jpg?1)
 
 ### JavaScript API
 
-El módulo debe poder importarse en otros scripts de Node.js y debe ofrecer la
+El módulo se puede importar en otros scripts de Node.js y  ofrece la
 siguiente interfaz:
 
 #### `mdLinks(path, options)`
@@ -40,7 +63,7 @@ siguiente interfaz:
 ##### Argumentos
 
 - `path`: Ruta absoluta o relativa al archivo o directorio. Si la ruta pasada es
-  relativa, debe resolverse como relativa al directorio desde donde se invoca
+  relativa, se resuelve como relativa al directorio desde donde se invoca
   node - _current working directory_).
 - `options`: Un objeto con las siguientes propiedades:
   * `validate`: Booleano que determina si se desea validar los links
@@ -48,12 +71,12 @@ siguiente interfaz:
 
 ##### Valor de retorno
 
-La función debe retornar una promesa (`Promise`) que resuelva a un arreglo
+La función retorna una promesa (`Promise`) que resuelve a un arreglo
 (`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene
 las siguientes propiedades:
 
 - `href`: URL encontrada.
-- `text`: Texto que aparecía dentro del link (`<a>`).
+- `text`: Texto que aparecía dentro del link (`[]`).
 - `file`: Ruta del archivo donde se encontró el link.
 
 #### Ejemplo
@@ -82,15 +105,16 @@ mdLinks("./some/dir")
 
 ### CLI (Command Line Interface - Interfaz de Línea de Comando)
 
-El ejecutable de nuestra aplicación debe poder ejecutarse de la siguiente
+El ejecutable de nuestra aplicación se ejecuta de la siguiente
 manera a través de la terminal:
 
-`md-links <path-to-file> [options]`
+`md-links <ruta> [opciones]`
 
 Por ejemplo:
 
 ```sh
 $ md-links ./some/example.md
+
 File: ./some/example.md 
 Links: http://algo.com/2/3/ 
 Text: Link a algo
@@ -101,9 +125,9 @@ Text: Google
 
 ```
 
-El comportamiento por defecto no debe validar si las URLs responden ok o no,
-solo debe identificar el archivo markdown (a partir de la ruta que recibe como
-argumento), analizar el archivo Markdown e imprimir los links que vaya
+El comportamiento por defecto valida si las URLs responden ok o no,
+solo identifica el archivo markdown (a partir de la ruta que recibe como
+argumento), analiza el archivo Markdown e imprime los links que vaya
 encontrando, junto con la ruta del archivo donde aparece y el texto
 que hay dentro del link (truncado a 50 caracteres).
 
@@ -111,9 +135,9 @@ que hay dentro del link (truncado a 50 caracteres).
 
 ##### `--validate`
 
-Si pasamos la opción `--validate`, el módulo debe hacer una petición HTTP para
+Si pasamos la opción `--validate`, el módulo hace una petición HTTP para
 averiguar si el link funciona o no. Si el link resulta en una redirección a una
-URL que responde ok, entonces consideraremos el link como ok.
+URL que responde ok, entonces se considera el link como ok.
 
 Por ejemplo:
 
@@ -139,11 +163,14 @@ Status: 301
 Text: Google
 ```
 
-Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
-la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
-URL.
-
-
+En caso de encontrar un link inválido se presentará el siguiente mensaje:
+```
+File: ./some/example.md 
+Links:  http://gooooogle.com/ 
+StatusText: No es una URL válida
+Status: fail
+Text: Google
+```
 ##### `--stats`
 
 Si pasamos la opción `--stats` el output (salida) será un texto con estadísticas
@@ -151,6 +178,7 @@ básicas sobre los links.
 
 ```sh
 $ md-links ./some/example.md --stats
+
 Total: 3
 Unique: 3
 ```
@@ -160,52 +188,54 @@ necesiten de los resultados de la validación.
 
 ```sh
 $ md-links ./some/example.md --stats --validate
+
 Total: 3
 Unique: 3
 Broken: 1
 ```
 ##### `Casos de error`
 
-Si ingresamos una ruta inválida, se podrá leer el mensaje `Ingrese una ruta válida`
-Si se ingresa una ruta en la que no se encuentren archivos con extensión -md se podrá leer el mensaje `No se encontraron archivos .md`
+Si ingresamos una ruta inválida, se podrá leer el mensaje:
+```sh
+ `Ingrese una ruta válida`
+ ```
+Si se ingresa una ruta en la que no se encuentren archivos con extensión -md se podrá leer el mensaje:
+```sh
+ `No se encontraron archivos .md` 
+ ```
 
-## Entregables
-
-Módulo instalable via `npm install <github-user>/md-links`. Este módulo debe
-incluir tanto un ejecutable como una interfaz que podamos importar con `require`
-para usarlo programáticamente.
 
 ## Checklist
 
 ### General
 
-- [ ] Puede instalarse via `npm install --global <github-user>/md-links`
-- [ ] Crear un script en el `package.json` que transforme el codigo ES6+ a ES5.
+- [x] Puede instalarse via `npm install --global <github-user>/md-links`
+- [x] Crear un script en el `package.json` que transforme el codigo ES6+ a ES5.
 
 ### `README.md`
 
-- [ ] Colocar el *pseudo codigo* o *diagrama de flujo* con el algoritmo que
+- [x] Colocar el *pseudo codigo* o *diagrama de flujo* con el algoritmo que
   soluciona el problema.
-- [ ] Un board con el backlog para la implementación de la librería.
-- [ ] Documentación técnica de la librería.
-- [ ] Guía de uso e instalación de la librería
+- [x] Un board con el backlog para la implementación de la librería.
+- [x] Documentación técnica de la librería.
+- [x] Guía de uso e instalación de la librería
 
 ### API `mdLinks(path, opts)`
 
-- [ ] El módulo exporta una función con la interfaz (API) esperada.
-- [ ] Implementa soporte para archivo individual
-- [ ] Implementa soporte para directorios
-- [ ] Implementa `options.validate`
+- [x] El módulo exporta una función con la interfaz (API) esperada.
+- [x] Implementa soporte para archivo individual
+- [x] Implementa soporte para directorios
+- [x] Implementa `options.validate`
 
 ### CLI
 
-- [ ] Expone ejecutable `md-links` en el path (configurado en `package.json`)
-- [ ] Se ejecuta sin errores / output esperado
-- [ ] Implementa `--validate`
-- [ ] Implementa `--stats`
+- [x] Expone ejecutable `md-links` en el path (configurado en `package.json`)
+- [x] Se ejecuta sin errores / output esperado
+- [x] Implementa `--validate`
+- [x] Implementa `--stats`
 
 ### Pruebas / tests
 
-- [ ] Pruebas unitarias cubren un mínimo del 70% de statements, functions,
+- [x] Pruebas unitarias cubren un mínimo del 70% de statements, functions,
   lines, y branches.
-- [ ] Pasa tests (y linters) (`npm test`).
+- [x] Pasa tests (y linters) (`npm test`).
