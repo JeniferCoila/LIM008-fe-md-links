@@ -1,6 +1,6 @@
 # Markdown Links
 
-Esta es una librería que te permitirá extraer links de un archivo markdown (.md)
+Esta es una librería que te permitirá extraer links de un archivo markdown ( .md | .MD | .Md | .mD )
 
 ## Markdown
 
